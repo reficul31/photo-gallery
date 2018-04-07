@@ -1,0 +1,9 @@
+{
+  "server_addr": ":8080",
+  "db_user": "root",
+  "db_password": "reficul31",
+  "db_name": "thechubbydev",
+  "template_root": "./public/",
+  "secret_key": "db51542b6345e5d681809ffe9b2ec271",
+  "db_log": true
+}
