@@ -1,3 +1,4 @@
 import album from './album'
+import photo from './photo'
 
-export default {album}
+export default {album, photo}

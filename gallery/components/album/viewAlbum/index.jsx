@@ -7,6 +7,7 @@ class ViewAlbum extends React.Component {
     super(props);
     this.editAlbumClicked = this.editAlbumClicked.bind(this);
     this.deleteAlbumClicked = this.deleteAlbumClicked.bind(this);
+    this.addPhotosInAlbumClicked = this.addPhotosInAlbumClicked.bind(this);
   }
   componentWillMount() {
     this.props.onComponentMount()
@@ -21,6 +22,9 @@ class ViewAlbum extends React.Component {
   deleteAlbumClicked(album) {
     this.props.onDeleteAlbum(album)
   }
+  addPhotosInAlbumClicked(album) {
+    this.props.onAddPhotos(album)
+  }
   render() {
     return (
       <div className="table-container">
@@ -33,7 +37,8 @@ class ViewAlbum extends React.Component {
 	                <p>{parseInt(album.privacy) == 0?"Private":"Public"}</p>
                   <p>{album.created}</p>
 	                <p><button onClick={() => {this.editAlbumClicked(album)}}>edit</button></p>
-	                <p><button onClick={() => {this.deleteAlbumClicked(album)}}>delete</button></p>
+                  <p><button onClick={() => {this.deleteAlbumClicked(album)}}>delete</button></p>
+	                <p><button onClick={() => {this.addPhotosInAlbumClicked(album)}}>Add Photos</button></p>
             	</div>
             )
           })}
@@ -49,6 +54,7 @@ ViewAlbum.propTypes = {
   	clearInfo: PropTypes.func.isRequired,
   	onDeleteAlbum: PropTypes.func.isRequired,
   	onEditAlbum: PropTypes.func.isRequired,
+    onAddPhotos: PropTypes.func.isRequired,
   	onComponentMount: PropTypes.func.isRequired,
 }
 

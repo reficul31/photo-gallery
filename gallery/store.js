@@ -8,6 +8,7 @@ import * as epics from './epics'
 
 const rootReducer = combineReducers({
 	album: reducer.album,
+	photo: reducer.photo,
 })
 
 const rootEpic = combineEpics(

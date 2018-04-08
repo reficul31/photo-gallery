@@ -11,6 +11,11 @@ import ViewAlbumContainer from './containers/album/viewAlbum'
 import EditAlbumContainer from './containers/album/editAlbum'
 import AddAlbumContainer from './containers/album/addAlbum'
 
+import Photo from './components/photo'
+import ViewPhotoContainer from './containers/photo/viewPhoto'
+import AddPhotoContainer from './containers/photo/addPhoto'
+
+
 import Routes from './routes'
 
 let ReduxDevTools
@@ -34,6 +39,11 @@ ReactDOM.render(
             <Route key='/gallery/album/view' path='/gallery/album/view' component={ViewAlbumContainer}/>
             <Route key='/gallery/album/edit' path='/gallery/album/edit' component={EditAlbumContainer}/>
             <Route key='/gallery/album/add' path='/gallery/album/add' component={AddAlbumContainer}/>
+          </Route>
+          <Route key='/gallery/photo' path='/gallery/photo' component={Photo}>
+            <IndexRedirect to='/gallery/photo/view' />
+            <Route key='/gallery/photo/view' path='/gallery/photo/view' component={ViewPhotoContainer}/>
+            <Route key='/gallery/photo/add' path='/gallery/photo/add' component={AddPhotoContainer}/>
           </Route>
         </Route>
       </Router>
