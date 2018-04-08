@@ -94,8 +94,13 @@ func PhotoHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	switch r.Method {
 	case "GET":
+		albumId, err := strconv.ParseInt(r.URL.Query().Get("albumId"), 10, 16)
+		if err != nil {
+			write_response(err, w, false, "No album specified for photos")
+			return
+		}
 		photos := &Photos{}
-		if err = DB.db.Find(&photos).Error; err != nil {
+		if err = DB.db.Where("album_id = ?", albumId).Find(&photos).Error; err != nil {
 			write_response(err, w, false, "Couldn't fetch the photos")
 			return
 		}
@@ -170,13 +175,14 @@ func PhotoHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 			return
 		}
 
+		filename := photo.Name
 		tx := DB.db.Begin()
 		if err = tx.Delete(&photo).Error; err != nil {
 			tx.Rollback()
 			write_response(err, w, false, "Can't delete photo.")
 		}
 		tx.Commit()
-
+		err = deleteFile(filename)
 		out = []byte("Photo Deleted!")
 	}
 

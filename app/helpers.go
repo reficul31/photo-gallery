@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"github.com/dgrijalva/jwt-go"
 	"io"
+	"os"
     "io/ioutil"
 	"log"
 	"math/rand"
@@ -98,6 +99,15 @@ func saveFile(w http.ResponseWriter, file multipart.File, handle *multipart.File
     err = ioutil.WriteFile(PhotosDir+handle.Filename+".png", data, 0666)
     if err != nil {
         return err
+    }
+
+    return nil
+}
+
+func deleteFile(filename string) error {
+    err := os.Remove(PhotosDir+filename+".png")
+    if err != nil {
+    	return err
     }
 
     return nil
