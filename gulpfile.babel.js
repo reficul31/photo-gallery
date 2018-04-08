@@ -16,6 +16,11 @@ const sourceFiles = [
         output: 'landing.js',
         destination: './public/static/js',
     },
+    {
+        entries: ['./gallery/main.jsx'],
+        output: 'gallery.js',
+        destination: './public/static/js',
+    },
 ]
 
 const browserifySettings = {

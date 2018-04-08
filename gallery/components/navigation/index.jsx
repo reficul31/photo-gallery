@@ -7,6 +7,7 @@ const Navigation = () => {
 	return (
 			<div>
 				<div><Link to="/gallery/album">Album</Link></div>
+				<div><a href="/logout">Logout</a></div>
 			</div>
 	)
 }

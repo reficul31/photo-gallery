@@ -10,7 +10,6 @@ const Album = ({children, location}) => {
       <div>
         <div>Albums</div>
         <Link className="table-button" to='/gallery/album/add'>Add</Link>
-        <Link className="table-button" to='/gallery/album/edit'>Edit</Link>
         <Link className="table-button" to='/gallery/album/view'>View</Link>
       </div>
       {children}

@@ -22,9 +22,6 @@ const validateAlbumDetails = (data) => {
         if(validator.isEmpty(data[objKeys[key]]))
           return {info:'Description cannot be empty', infoClass:'warn'}
       break;
-      default:
-        return {info: 'Invalid input', infoClass: 'warn'}
-      break;
     }
   }
   return {info:'Sending data', infoClass:'info'}

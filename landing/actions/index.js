@@ -60,7 +60,7 @@ export function sendLoginData(data) {
       }).then((data) => {
         if (data.success === true) {
           dispatch(setLoginStatus({info: data.data, infoClass: 'info'}))
-          window.location.assign('/')
+          window.location.assign('/gallery')
         }
         else if (data.success === false)
           dispatch(setLoginStatus({info: data.data, infoClass: 'error'}))

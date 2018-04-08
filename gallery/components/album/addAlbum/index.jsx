@@ -13,7 +13,8 @@ class AddAlbum extends React.Component {
   sendAlbumInfo() {
     const name = document.getElementById('name').value
     const description = document.getElementById('description').value
-    this.props.onAlbumInput({name, description})
+    const privacy = parseInt(document.getElementById('privacy').value)
+    this.props.onAlbumInput({name, description, privacy})
   }
   render() {
     return (
@@ -29,6 +30,13 @@ class AddAlbum extends React.Component {
             <li>
               <label>Description</label>
               <input type="text" id="description" />
+            </li>
+            <li>
+              <label>Privacy</label>
+              <select name="privacy" form="privacy" id="privacy">
+                <option value="0">Private</option>
+                <option value="1">Public</option>
+              </select>
             </li>
             <li>
               <input type="submit" onClick = {this.sendAlbumInfo} />

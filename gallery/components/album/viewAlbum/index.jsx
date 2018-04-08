@@ -27,9 +27,11 @@ class ViewAlbum extends React.Component {
         <p className={this.props.infoClass}>{this.props.info}</p>
           {this.props.albums.map((album, idx) => {
             return (
-            	<div>
+            	<div key={idx}>
 	                <p>{album.name}</p>
-	                <p>{album.description}</p>
+                  <p>{album.description}</p>
+	                <p>{parseInt(album.privacy) == 0?"Private":"Public"}</p>
+                  <p>{album.created}</p>
 	                <p><button onClick={() => {this.editAlbumClicked(album)}}>edit</button></p>
 	                <p><button onClick={() => {this.deleteAlbumClicked(album)}}>delete</button></p>
             	</div>
@@ -41,7 +43,7 @@ class ViewAlbum extends React.Component {
 }
 
 ViewAlbum.propTypes = {
-	albums: PropTypes.array.isRequired,
+    albums: PropTypes.array.isRequired,
   	info: PropTypes.string.isRequired,
   	infoClass: PropTypes.string.isRequired,
   	clearInfo: PropTypes.func.isRequired,
