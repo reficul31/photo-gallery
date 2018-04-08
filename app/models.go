@@ -32,6 +32,7 @@ type Photo struct {
 type Album struct {
 	ID          int       `json:"id" sql:"AUTO_INCREMENT" gorm:"primary_key"`
 	UserID      uint      `json:"user_id" sql:"not null"`
+	Name        string    `json:"name" sql:"not null"`
 	Description string    `json:"description" sql:"not null"`
 	Created     time.Time `json:"created, omitempty" sql:"not null;DEFAULT:current_timestamp"`
 	Photos      []Photo   `json:"photos"`
@@ -39,6 +40,7 @@ type Album struct {
 	Likes       int       `json:"likes" sql:"DEFAULT:0"`
 }
 
+type Albums []Album
 
 type ForgotPassword struct {
 	ID        string    `json:"id" gorm:"primary_key"`

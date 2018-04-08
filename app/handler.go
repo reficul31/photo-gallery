@@ -37,12 +37,12 @@ func Landing(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
 	landingTemplate.Execute(w, nil)
 }
 
-func Game(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
-	gameTemplate.Execute(w, nil)
+func Gallery(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
+	galleryTemplate.Execute(w, nil)
 }
 
-func Admin(w http.ResponseWriter, _ *http.Request, ps httprouter.Params) {
-	adminTemplate.Execute(w, nil)
+func Redirect(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+    http.Redirect(w, r, "/gallery/album", 301)
 }
 
 func Register(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
