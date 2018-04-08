@@ -1,9 +1,13 @@
 {
   "server_addr": ":8080",
-  "db_user": "root",
-  "db_password": "reficul31",
-  "db_name": "thechubbydev",
-  "template_root": "./public/",
+  "db_user": "therealssj",
+  "db_password": "thepassword",
+  "db_name": "gallery",
+  "template_root": "./templates/",
   "secret_key": "db51542b6345e5d681809ffe9b2ec271",
-  "db_log": true
+  "encryption_key": "#4lh9SyX$0Ft@D7cnT2F",
+  "datasite-key": "6LdCFBoUAAAAAHYM2SEXZCSn9P7spw4c3M8SA7TU",
+  "encrypt_answer": false,
+  "min_encryption_level": 3,
+  "db_log": false
 }

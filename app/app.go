@@ -1,12 +1,12 @@
 package app
 
 import (
+	"fmt"
+	_ "github.com/go-sql-driver/mysql" // the mysql driver
+	"github.com/jinzhu/gorm"
+	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
-
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite" // sqlite driver for gorm
-	"github.com/julienschmidt/httprouter"
 )
 
 // App encloses the router and db.
@@ -15,31 +15,32 @@ type App struct {
 	Config Configuration
 }
 
-// Database gives the database access
 type Database struct {
 	db *gorm.DB
 }
 
 var (
-	// DB is the Database adapter
-	DB       Database
-	err      error       // Error Global
-	currUser CurrentUser // Current user data global
+	DB         Database
+	err        error           // Error Global
+	currUser   CurrentUser     // Current user data global
 )
 
 // Initialize the router and db.
 func (a *App) Initialize(config Configuration) {
 	a.Config = config
 
-	DB.db, err = gorm.Open("sqlite3", "gallery.db")
-	DB.db.LogMode(config.DbLog)
+	connectionString := fmt.Sprintf("%s:%s@/%s?charset=utf8&parseTime=True&loc=Local",
+		config.DBUsername,
+		config.DBPassword,
+		config.DBName)
 
+	DB.db, err = gorm.Open("mysql", connectionString)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	DB.db.LogMode(config.DbLog)
 	a.Router = NewRouter()
-
 	PopulateTemplates(a.Config.TemplateRoot)
 }
 
