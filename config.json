@@ -9,5 +9,6 @@
   "datasite-key": "6LdCFBoUAAAAAHYM2SEXZCSn9P7spw4c3M8SA7TU",
   "encrypt_answer": false,
   "min_encryption_level": 3,
-  "db_log": false
+  "db_log": false,
+  "photos_dir": "./public/images/"
 }
