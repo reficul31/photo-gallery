@@ -167,4 +167,22 @@ var routes = Routes{
 		"/album",
 		RequiresLogin(AlbumHandler, false),
 	},
+	Route{
+		"PhotoHandler",
+		"GET",
+		"/photo",
+		RequiresLogin(PhotoHandler, false),
+	},
+	Route{
+		"PhotoHandler",
+		"POST",
+		"/photo",
+		RequiresLogin(PhotoHandler, false),
+	},
+	Route{
+		"PhotoHandler",
+		"DELETE",
+		"/photo",
+		RequiresLogin(PhotoHandler, false),
+	},
 }

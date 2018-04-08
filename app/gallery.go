@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
+	"strconv"
 )
 
 func AlbumHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
@@ -82,6 +83,101 @@ func AlbumHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		tx.Commit()
 
 		out = []byte("Album Deleted!")
+	}
+
+	write_response(nil, w, true, string(out))
+	return
+}
+
+func PhotoHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	var out []byte // json output
+
+	switch r.Method {
+	case "GET":
+		photos := &Photos{}
+		if err = DB.db.Find(&photos).Error; err != nil {
+			write_response(err, w, false, "Couldn't fetch the photos")
+			return
+		}
+
+		out, err = json.Marshal(photos)
+		if err != nil {
+			write_response(err, w, false, "Internal Server Error")
+			return
+		}
+
+	case "POST":
+		r.ParseMultipartForm(32 << 20)
+		file, handler, err := r.FormFile("file")
+		if err != nil {
+			write_response(err, w, false, "Internal Server Error")
+			return
+		}
+
+		handler.Filename = RandStringRunes(20)
+
+		mimeType := handler.Header.Get("Content-Type")
+		switch mimeType {
+		case "image/png":
+		    err = saveFile(w, file, handler)
+		default:
+		    write_response(err, w, false, "The format file is not valid. Please upload only png images.")
+		    return
+		}
+
+		if err != nil {
+			write_response(err, w, false, "Internal Server Error")
+			return
+		}
+
+		description := r.Form["description"][0]
+		privacy, err := strconv.Atoi(r.Form["privacy"][0])
+		if err != nil {
+			write_response(err, w, false, "Internal Server Error")
+			return
+		}
+
+		albumId, err := strconv.Atoi(r.Form["albumId"][0])
+		if err != nil {
+			write_response(err, w, false, "Internal Server Error")
+			return
+		}
+
+		photo := Photo{
+			Name: handler.Filename,
+			Description: description,
+			Privacy: privacy,
+			AlbumID: uint(albumId),
+			Likes: 0,
+		}
+
+		tx := DB.db.Begin()
+
+		if err = tx.Create(&photo).Error; err != nil {
+			tx.Rollback()
+			write_response(err, w, false, "Can't add photo")
+			return
+		}
+		tx.Commit()
+
+		out = []byte("Photo Added!")
+
+	case "DELETE":
+		photo := Photo{}
+		err = json.NewDecoder(r.Body).Decode(&photo)
+		if err != nil {
+			write_response(err, w, false, "Internal Server Error")
+			return
+		}
+
+		tx := DB.db.Begin()
+		if err = tx.Delete(&photo).Error; err != nil {
+			tx.Rollback()
+			write_response(err, w, false, "Can't delete photo.")
+		}
+		tx.Commit()
+
+		out = []byte("Photo Deleted!")
 	}
 
 	write_response(nil, w, true, string(out))

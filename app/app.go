@@ -23,6 +23,7 @@ var (
 	DB         Database
 	err        error           // Error Global
 	currUser   CurrentUser     // Current user data global
+	PhotosDir  string
 )
 
 // Initialize the router and db.
@@ -41,6 +42,7 @@ func (a *App) Initialize(config Configuration) {
 
 	DB.db.LogMode(config.DbLog)
 	a.Router = NewRouter()
+	PhotosDir = a.Config.PhotosDir
 	PopulateTemplates(a.Config.TemplateRoot)
 }
 

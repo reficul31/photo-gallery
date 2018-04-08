@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"github.com/dgrijalva/jwt-go"
 	"io"
+    "io/ioutil"
 	"log"
 	"math/rand"
 	"net/http"
 	"strings"
 	"time"
+	"mime/multipart"
 )
 
 var replacer = strings.NewReplacer("_", "")
@@ -85,4 +87,18 @@ func tokenValid(myToken string, claims jwt.MapClaims, myKey string) bool {
 	} else {
 		return false
 	}
+}
+
+func saveFile(w http.ResponseWriter, file multipart.File, handle *multipart.FileHeader) error {
+    data, err := ioutil.ReadAll(file)
+    if err != nil {
+        return err
+    }
+
+    err = ioutil.WriteFile(PhotosDir+handle.Filename+".png", data, 0666)
+    if err != nil {
+        return err
+    }
+
+    return nil
 }

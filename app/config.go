@@ -23,6 +23,7 @@ type Configuration struct {
 	EncryptAnswer      bool   `json:"encrypt_answer"`
 	MinEncryptionLevel int    `json:"min_encryption_level"`
 	DbLog              bool   `json:"db_log"`
+	PhotosDir          string `json:"photos_dir"`
 }
 
 var config Configuration

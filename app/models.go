@@ -22,11 +22,14 @@ type Users []User
 type Photo struct {
 	ID          int       `json:"id" sql:"AUTO_INCREMENT" gorm:"primary_key"`
 	AlbumID     uint      `json:"album_id" sql:"not null"`
+	Name        string    `json:"name" sql:"not null; unique"`
 	Description string    `json:"description" sql:"not null"`
 	Created     time.Time `json:"created, omitempty" sql:"not null;DEFAULT:current_timestamp"`
 	Privacy     int       `json:"privacy" sql:"not null; DEFAULT:0"`
 	Likes       int       `json:"likes" sql:"DEFAULT:0"`
 }
+
+type Photos []Photo
 
 // Album describes the album structure
 type Album struct {
