@@ -2,12 +2,13 @@ import { createAction } from 'redux-act'
 import validator from 'validator'
 
 const setInfo = createAction('photo/setInfo')
+const setPhoto = createAction('photo/setPhoto')
 const addPhoto = createAction('photo/addPhoto')
 const deletePhoto = createAction('photo/deletePhoto')
 const setAlbum = createAction('photo/setAlbum')
 const fetchPhotos = createAction('photo/fetchPhotos')
 
-export default {setInfo, addPhoto, deletePhoto, fetchPhotos, setAlbum}
+export default {setInfo, addPhoto, deletePhoto, fetchPhotos, setAlbum, setPhoto}
 
 const validatePhotoDetails = (data) => {
   let objKeys = Object.keys(data)
@@ -26,21 +27,36 @@ export function sendPhoto(data) {
   return async function(dispatch){
     const {info, infoClass} = validatePhotoDetails(data.photo)
     dispatch(setInfo({info, infoClass}))
-    var formData  = new FormData();
-    formData.append("file", data.photo.photos[0])
-    formData.append("privacy",  data.photo.privacy)
-    formData.append("description",  data.photo.description)
-    formData.append("albumId",  data.photo.albumId)
-    if(infoClass == 'info'){
-      await fetch('/photo', {
-        method      : data.type,
-        body        : formData,
-        credentials : 'same-origin',
-      }).then((response) => {
-        return response.json()
-      }).then((data) => {
-        dispatch(setInfo({info: data.data, infoClass: 'info'}))
-      })
+    if(data.type == "POST") {
+      var formData  = new FormData();
+      formData.append("file", data.photo.photos[0])
+      formData.append("privacy",  data.photo.privacy)
+      formData.append("description",  data.photo.description)
+      formData.append("albumId",  data.photo.albumId)
+      if(infoClass == 'info'){
+        await fetch('/photo', {
+          method      : data.type,
+          body        : formData,
+          credentials : 'same-origin',
+        }).then((response) => {
+          return response.json()
+        }).then((data) => {
+          dispatch(setInfo({info: data.data, infoClass: 'info'}))
+        })
+      }
+    } else {
+      if(infoClass == 'info'){
+        await fetch('/photo', {
+          method      : data.type,
+          body        : JSON.stringify(data.photo),
+          credentials : 'same-origin',
+          headers     : { 'Content-Type': 'application/json' }
+        }).then((response) => {
+          return response.json()
+        }).then((data) => {
+          dispatch(setInfo({info: data.data, infoClass: 'info'}))
+        })
+      }
     }
     return
   }
@@ -48,7 +64,7 @@ export function sendPhoto(data) {
 
 export function getPhoto(data) {
   return async function(dispatch) {
-    await fetch('/photo', {
+    await fetch(`/photo?albumId=${data.id}`, {
       method      : 'GET',
       credentials : 'same-origin',
       headers     : { 'Content-Type': 'multipart/form-data' }
