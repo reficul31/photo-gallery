@@ -6,20 +6,18 @@ import * as actions from './../../actions'
 const mapStateToProps = state => {
   return {
     photos: state.photo.photos,
+    album: state.photo.album,
     info: state.photo.info,
     infoClass: state.photo.infoClass,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  onEditPhoto: input => {
-    dispatch(actions.photo.editPhoto({photo: input}))
-  },
   onDeletePhoto: input => {
     dispatch(actions.photo.deletePhoto({photo:input, type: 'DELETE'}))
   },
-  onComponentMount: () => {
-    dispatch(actions.photo.fetchPhotos())
+  onComponentMount: input => {
+    dispatch(actions.photo.fetchPhotos(input))
   },
   clearInfo: () => {
     dispatch(actions.photo.setInfo({info: '', infoClass: ''}))

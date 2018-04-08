@@ -8,6 +8,7 @@ class ViewAlbum extends React.Component {
     this.editAlbumClicked = this.editAlbumClicked.bind(this);
     this.deleteAlbumClicked = this.deleteAlbumClicked.bind(this);
     this.addPhotosInAlbumClicked = this.addPhotosInAlbumClicked.bind(this);
+    this.viewPhotosInAlbumClicked = this.viewPhotosInAlbumClicked.bind(this);
   }
   componentWillMount() {
     this.props.onComponentMount()
@@ -25,6 +26,9 @@ class ViewAlbum extends React.Component {
   addPhotosInAlbumClicked(album) {
     this.props.onAddPhotos(album)
   }
+  viewPhotosInAlbumClicked(album) {
+    this.props.onViewPhotos(album)
+  }
   render() {
     return (
       <div className="table-container">
@@ -38,7 +42,8 @@ class ViewAlbum extends React.Component {
                   <p>{album.created}</p>
 	                <p><button onClick={() => {this.editAlbumClicked(album)}}>edit</button></p>
                   <p><button onClick={() => {this.deleteAlbumClicked(album)}}>delete</button></p>
-	                <p><button onClick={() => {this.addPhotosInAlbumClicked(album)}}>Add Photos</button></p>
+                  <p><button onClick={() => {this.addPhotosInAlbumClicked(album)}}>Add Photos</button></p>
+	                <p><button onClick={() => {this.viewPhotosInAlbumClicked(album)}}>View Photos</button></p>
             	</div>
             )
           })}
@@ -55,6 +60,7 @@ ViewAlbum.propTypes = {
   	onDeleteAlbum: PropTypes.func.isRequired,
   	onEditAlbum: PropTypes.func.isRequired,
     onAddPhotos: PropTypes.func.isRequired,
+    onViewPhotos: PropTypes.func.isRequired,
   	onComponentMount: PropTypes.func.isRequired,
 }
 

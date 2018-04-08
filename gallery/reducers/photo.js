@@ -26,6 +26,10 @@ function setAlbum(state, album) {
   return {...state, album}
 }
 
+function setPhoto(state, photos) {
+  return {...state, photos}
+}
+
 function setInfo(state, {info, infoClass}) {
   return {...state, info, infoClass}
 }
@@ -36,4 +40,5 @@ export default createReducer({
   [actions.photo.deletePhoto]: deletePhoto,
   [actions.photo.fetchPhotos]: fetchPhotos,
   [actions.photo.setAlbum]: setAlbum,
+  [actions.photo.setPhoto]: setPhoto,
 }, defaultStore)

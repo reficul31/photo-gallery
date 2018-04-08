@@ -23,6 +23,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.photo.setAlbum(input))
     browserHistory.push('/gallery/photo/add')
   },
+  onViewPhotos: input => {
+    dispatch(actions.photo.setAlbum(input))
+    browserHistory.push('/gallery/photo/view')
+  },
   onComponentMount: () => {
     dispatch(actions.album.fetchAlbums())
   },
