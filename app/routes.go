@@ -78,12 +78,6 @@ func RequiresLogin(inner httprouter.Handle, isAdmin bool) httprouter.Handle {
 
 var routes = Routes{
 	Route{
-		"Game",
-		"GET",
-		"/",
-		RequiresLogin(Game, false),
-	},
-	Route{
 		"Login",
 		"GET",
 		"/login",
@@ -131,16 +125,46 @@ var routes = Routes{
 		"/forgotpassword",
 		ForgotPasswordHandler,
 	},
-	//Route{
-	//	"GetPlayer",
-	//	"GET",
-	//	"/getPlayer",
-	//	RequiresLogin(GetPlayer, false),
-	//},
-	//Route{
-	//	"ModifyPlayer",
-	//	"POST",
-	//	"/modifyPlayer",
-	//	RequiresLogin(ModifyPlayer, false),
-	//},
+	Route{
+		"GetPlayer",
+		"GET",
+		"/getPlayer",
+		RequiresLogin(GetPlayer, false),
+	},
+	Route{
+		"ModifyPlayer",
+		"POST",
+		"/modifyPlayer",
+		RequiresLogin(ModifyPlayer, false),
+	},
+	Route{
+		"Gallery",
+		"GET",
+		"/gallery/*route",
+		RequiresLogin(Gallery, false),
+	},
+	Route{
+		"AlbumHandler",
+		"GET",
+		"/album",
+		RequiresLogin(AlbumHandler, false),
+	},
+	Route{
+		"AlbumHandler",
+		"PUT",
+		"/album",
+		RequiresLogin(AlbumHandler, false),
+	},
+	Route{
+		"AlbumHandler",
+		"POST",
+		"/album",
+		RequiresLogin(AlbumHandler, false),
+	},
+	Route{
+		"AlbumHandler",
+		"DELETE",
+		"/album",
+		RequiresLogin(AlbumHandler, false),
+	},
 }

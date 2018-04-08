@@ -12,8 +12,7 @@ import (
 )
 
 var landingTemplate *template.Template
-var gameTemplate *template.Template
-var adminTemplate *template.Template
+var galleryTemplate *template.Template
 var templates *template.Template
 
 //PopulateTemplates is used to parse all templates present in
@@ -39,6 +38,5 @@ func PopulateTemplates(templatesDir string) {
 	}
 	templates := template.Must(template.ParseFiles(allFiles...))
 	landingTemplate = templates.Lookup("landing.html")
-	gameTemplate = templates.Lookup("game.html")
-	adminTemplate = templates.Lookup("admin.html")
+	galleryTemplate = templates.Lookup("gallery.html")
 }
