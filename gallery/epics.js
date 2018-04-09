@@ -5,6 +5,7 @@ import 'rxjs/add/operator/filter'
 import * as actions from './actions'
 import {sendAlbum, getAlbum} from './actions/album'
 import {sendPhoto, getPhoto} from './actions/photo'
+import {sendUser, getUser} from './actions/user'
 
 export const validateAlbumOnAdminInput = action$ => action$
   .filter(action => action.type === actions.album.addAlbum.getType())
@@ -31,3 +32,12 @@ export const deletePhotoOnAdminInput = action$ => action$
 export const fetchPhotos = action$ => action$
   .filter(action => action.type === actions.photo.fetchPhotos.getType())
   .map((action) => getPhoto(action.payload))
+
+export const fetchUser = action$ => action$
+  .filter(action => action.type === actions.user.fetchUser.getType())
+  .map((action) => getUser(action.payload))
+
+export const validateUserOnAdminInput = action$ => action$
+  .filter(action => action.type === actions.user.editUser.getType())
+  .debounceTime(500)
+  .map((action) => sendUser(action.payload))

@@ -15,6 +15,9 @@ import Photo from './components/photo'
 import ViewPhotoContainer from './containers/photo/viewPhoto'
 import AddPhotoContainer from './containers/photo/addPhoto'
 
+import User from './components/user'
+import ViewUserContainer from './containers/user/viewUser'
+import EditUserContainer from './containers/user/editUser'
 
 import Routes from './routes'
 
@@ -33,7 +36,6 @@ ReactDOM.render(
     <div>
       <Router history={browserHistory}>
         <Redirect from='/' to='/gallery/album'/>
-        <Redirect from='/gallery' to='/gallery/album'/>
         <Route path='/gallery/layout' component={Layout}>
           <IndexRedirect to='/gallery/album' />
           <Route key='/gallery/album' path='/gallery/album' component={Album}>
@@ -46,6 +48,11 @@ ReactDOM.render(
             <IndexRedirect to='/gallery/photo/view' />
             <Route key='/gallery/photo/view' path='/gallery/photo/view' component={ViewPhotoContainer}/>
             <Route key='/gallery/photo/add' path='/gallery/photo/add' component={AddPhotoContainer}/>
+          </Route>
+          <Route key='/gallery' path='/gallery' component={User}>
+            <IndexRedirect to='/gallery/user/view' />
+            <Route key='/gallery/user/view' path='/gallery/user/view' component={ViewUserContainer}/>
+            <Route key='/gallery/user/edit' path='/gallery/user/edit' component={EditUserContainer}/>
           </Route>
         </Route>
       </Router>
