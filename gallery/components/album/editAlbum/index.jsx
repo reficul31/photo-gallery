@@ -30,7 +30,7 @@ class EditAlbum extends React.Component {
             <div className="w3-third">
               <select className="w3-input w3-border" name="privacy" form="privacy" id="privacy">
                 <option value="0">Private</option>
-                <option value="1">Pubdivc</option>
+                <option value="1">Public</option>
               </select>
             </div>
             <div className="w3-full">
