@@ -6,11 +6,12 @@ import classNames from 'classnames'
 
 const Photo = ({children, location}) => {
   return (
-    <div>
+    <div className="w3-container w3-center">
       <div>
-        <div>Photos</div>
-        <Link to='/gallery/photo/add'>Add</Link>
-        <Link to='/gallery/photo/view'>View</Link>
+        <h1 className="w3-jumbo w3-animate-top w3-center">PHOTOS</h1>
+        <hr></hr>
+        <button className="w3-button w3-circle w3-teal" title="Add Photos"><Link to='/gallery/photo/add'>Add</Link></button>
+        <button className="w3-button w3-circle w3-black" title="View Photos"><Link to='/gallery/photo/view'>View</Link></button>
       </div>
       {children}
     </div>

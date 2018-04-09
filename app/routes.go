@@ -78,6 +78,12 @@ func RequiresLogin(inner httprouter.Handle, isAdmin bool) httprouter.Handle {
 
 var routes = Routes{
 	Route{
+		"Gallery",
+		"GET",
+		"/",
+		RequiresLogin(Gallery, false),
+	},
+	Route{
 		"Login",
 		"GET",
 		"/login",

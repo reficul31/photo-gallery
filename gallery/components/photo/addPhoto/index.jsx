@@ -23,27 +23,22 @@ class AddPhoto extends React.Component {
       	<div>
         <p>Album Name: {this.props.album.name}</p>
         <p className={this.props.infoClass}>{this.props.info}</p>
-        <form onSubmit = {(e) => {e.preventDefault()}} className="gallery-form">
-          <ul>
-            <li>
-              <label>Photos</label>
-              <input type="file" id="photos" name="photos" accept="image/*" />
-            </li>
-            <li>
-              <label>Description</label>
-              <input type="text" id="description" name="description" />
-            </li>
-            <li>
-              <label>Privacy</label>
-              <select name="privacy" form="privacy" id="privacy">
+        <form onSubmit = {(e) => {e.preventDefault()}}>
+            <div className="w3-third">
+              <input className="w3-input w3-border" type="file" id="photos" name="photos" accept="image/*" />
+            </div>
+            <div className="w3-third">
+              <input className="w3-input w3-border" type="text" id="description" name="description" placeholder="Description" />
+            </div>
+            <div className="w3-third">
+              <select className="w3-input w3-border" name="privacy" form="privacy" id="privacy">
                 <option value="0">Private</option>
                 <option value="1">Public</option>
               </select>
-            </li>
-            <li>
-              <input type="submit" onClick = {this.sendPhotoInfo} />
-            </li>
-          </ul>
+            </div>
+            <div className="w3-full">
+              <input className="w3-input w3-border" type="submit" onClick = {this.sendPhotoInfo} />
+            </div>
           </form>
       </div>
       </div>

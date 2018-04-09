@@ -18,17 +18,25 @@ class ViewPhoto extends React.Component {
   }
   render() {
     return (
-      <div className="table-container">
+      <div className="w3-container">
         <p className={this.props.infoClass}>{this.props.info}</p>
           {this.props.photos.map((photo, idx) => {
             return (
-            	<div key={idx}>
-	              <p>{photo.name}</p>
-                  <p>{photo.description}</p>
-	              <p>{parseInt(photo.privacy) == 0?"Private":"Public"}</p>
-                  <p>{photo.created}</p>
-                  <p><button onClick={() => {this.deletePhotoClicked(photo)}}>delete</button></p>
-            	</div>
+              <div key={idx} className="w3-display-container w3-quarter w3-hover-opacity w3-black">
+                <img src={"/images/"+photo.name+".png"} alt="Photo"></img>
+                <div className="w3-display-topleft w3-display-hover">
+                    <button className="w3-white w3-animate-opacity w3-btn w3-margin w3-round" onClick={() => {this.deletePhotoClicked(photo)}} title="Delete Photo"><i className="fa fa-close w3-text-red"></i></button>
+                </div>
+                <div className="w3-display-middle w3-display-hover">
+                  <p className="w3-black">{photo.description}</p>
+                </div>
+                <div className="w3-display-bottomright w3-display-hover">
+                  <p className="w3-black">{photo.created}</p>
+                </div>
+                <div className="w3-display-bottomleft w3-display-hover">
+                  <p className="w3-black">{parseInt(photo.privacy) == 0?"PRIVATE":"PUBLIC"}</p>
+                </div>
+              </div>
             )
           })}
       </div>

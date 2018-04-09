@@ -8,12 +8,16 @@ a{
 	text-decoration: none;
 }
 
+.navbar-text{
+	margin: 20px;
+}
+
 .warn{
 	color: yellow;
 }
 
 .info{
-	color: white;
+	color: blue;
 }
 
 .error{

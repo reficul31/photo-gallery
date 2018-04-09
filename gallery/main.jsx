@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router, Route, IndexRedirect, browserHistory } from 'react-router'
+import { Router, Redirect, Route, IndexRedirect, browserHistory } from 'react-router'
 import configureStore from './store'
 import { Provider } from 'react-redux'
 
@@ -32,6 +32,8 @@ ReactDOM.render(
   <Provider store={store}>
     <div>
       <Router history={browserHistory}>
+        <Redirect from='/' to='/gallery/album'/>
+        <Redirect from='/gallery' to='/gallery/album'/>
         <Route path='/gallery/layout' component={Layout}>
           <IndexRedirect to='/gallery/album' />
           <Route key='/gallery/album' path='/gallery/album' component={Album}>

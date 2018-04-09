@@ -21,8 +21,7 @@ class AddAlbum extends React.Component {
       <div>
       	<div>
         <p className={this.props.infoClass}>{this.props.info}</p>
-        <form onSubmit = {(e) => {e.preventDefault()}}>
-            
+        <form onSubmit = {(e) => {e.preventDefault()}}>            
               <div className="w3-third">
                 <input className="w3-input w3-border" type="text" id="name" placeholder="Name"/>
               </div>
