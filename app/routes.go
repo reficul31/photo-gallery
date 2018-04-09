@@ -139,7 +139,7 @@ var routes = Routes{
 	},
 	Route{
 		"ModifyUser",
-		"POST",
+		"PUT",
 		"/modifyUser",
 		RequiresLogin(ModifyUser, false),
 	},

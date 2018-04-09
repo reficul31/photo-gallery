@@ -17,14 +17,22 @@ type LoginUser struct {
 	Password string `json:"password"`
 }
 
+type ResetPasswordUser struct {
+	Token    string `json:"token"`
+	Password string `json:"pasword"`
+	Captcha  string `json:"captcha"`
+}
+
 type ForgotPasswordUser struct {
 	Email   string `json:"email"`
 }
 
-type ResetPasswordUser struct {
-	Token    string `json:"token"`
-	Password string `json:"password"`
-	Captcha  string `json:"captcha"`
+type GetUserStruct struct {
+	Name    string `json:"name"`
+	Gender  string `json:"gender"`
+	Email   string `json:"email"`
+	Albums  int    `json:"albums"`
+	Photos  int    `json:"photos"`
 }
 
 type ForgotPasswordResponse struct {
@@ -129,7 +137,26 @@ func GetUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 
-	out, err := json.Marshal(user)
+	rows, err := DB.db.Raw("select count(distinct albums.id), count(photos.id) from photos, albums where photos.album_id = albums.id and albums.id in (select id from albums where user_id=?)", currUser.ID).Rows()
+	if err != nil {
+		write_response(err, w, false, "Internal Server Error")
+		return
+	}
+	var albums, photos int
+	rows.Next()
+	rows.Scan(&albums, &photos)
+	rows.Close()
+
+	respUser := GetUserStruct{
+		Name: user.Name,
+		Email: user.Email,
+		Gender: user.Gender,
+		Albums: albums,
+		Photos: photos,
+	}
+
+
+	out, err := json.Marshal(respUser)
 	if err != nil {
 		write_response(err, w, false, "Internal Server Error")
 		return
@@ -158,6 +185,7 @@ func ModifyUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	updatedUser.Name = respUser.Name
 	updatedUser.Gender = respUser.Gender
+	updatedUser.Email = respUser.Email
 
 	tx := DB.db.Begin()
 	if err = tx.Save(&updatedUser).Error; err != nil {
@@ -167,7 +195,7 @@ func ModifyUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	}
 	tx.Commit()
 
-	write_response(nil, w, true, "")
+	write_response(nil, w, true, "User Updated!")
 	return
 
 }
