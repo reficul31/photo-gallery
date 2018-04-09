@@ -132,16 +132,16 @@ var routes = Routes{
 		ForgotPasswordHandler,
 	},
 	Route{
-		"GetPlayer",
+		"GetUser",
 		"GET",
-		"/getPlayer",
-		RequiresLogin(GetPlayer, false),
+		"/getUser",
+		RequiresLogin(GetUser, false),
 	},
 	Route{
-		"ModifyPlayer",
+		"ModifyUser",
 		"POST",
-		"/modifyPlayer",
-		RequiresLogin(ModifyPlayer, false),
+		"/modifyUser",
+		RequiresLogin(ModifyUser, false),
 	},
 	Route{
 		"Gallery",

@@ -120,7 +120,7 @@ func Logout(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	http.Redirect(w, r, "/login", 302)
 }
 
-func GetPlayer(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func GetUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	defer r.Body.Close()
 
 	user := User{}
@@ -139,7 +139,7 @@ func GetPlayer(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	return
 }
 
-func ModifyPlayer(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func ModifyUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	defer r.Body.Close()
 
 	respUser := User{}
