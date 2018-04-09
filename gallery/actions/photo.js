@@ -73,7 +73,7 @@ export function getPhoto(data) {
     }).then((data) => {
       let photos = JSON.parse(data.data)
       dispatch(setPhoto(photos))
-      dispatch(setInfo({info: `${photos.length} rows found`, infoClass:'info'}))
+      dispatch(setInfo({info: `${photos.length} photos found`, infoClass:'info'}))
     })
   }
 }

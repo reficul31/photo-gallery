@@ -58,7 +58,7 @@ export function getAlbum(data) {
     }).then((data) => {
       let albums = JSON.parse(data.data)
       dispatch(setAlbum(albums))
-      dispatch(setInfo({info: `${albums.length} rows found`, infoClass:'info'}))
+      dispatch(setInfo({info: `${albums.length} albums found`, infoClass:'info'}))
     })
   }
 }
