@@ -1,0 +1,21 @@
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+img{
+	width:100%;
+}
+
+a{
+	text-decoration: none;
+}
+
+.warn{
+	color: yellow;
+}
+
+.info{
+	color: white;
+}
+
+.error{
+	color: red;
+}

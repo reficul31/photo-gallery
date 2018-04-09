@@ -7,7 +7,7 @@ import classNames from 'classnames'
 const Layout = ({children}) => (
 	<div>
 		<Navigation />
-		<div>
+		<div className="w3-display-middle">
 			{children}
 		</div>
 	</div>

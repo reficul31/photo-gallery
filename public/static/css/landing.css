@@ -1,0 +1,24 @@
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('../img/forestbridge.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+a{
+	text-decoration: none;
+}
+
+.warn{
+	color: yellow;
+}
+
+.info{
+	color: white;
+}
+
+.error{
+	color: red;
+}

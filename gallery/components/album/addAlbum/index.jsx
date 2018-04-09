@@ -21,27 +21,23 @@ class AddAlbum extends React.Component {
       <div>
       	<div>
         <p className={this.props.infoClass}>{this.props.info}</p>
-        <form onSubmit = {(e) => {e.preventDefault()}} className="gallery-form">
-          <ul>
-            <li>
-              <label>Name</label>
-              <input type="text" id="name" />
-            </li>
-            <li>
-              <label>Description</label>
-              <input type="text" id="description" />
-            </li>
-            <li>
-              <label>Privacy</label>
-              <select name="privacy" form="privacy" id="privacy">
-                <option value="0">Private</option>
-                <option value="1">Public</option>
-              </select>
-            </li>
-            <li>
-              <input type="submit" onClick = {this.sendAlbumInfo} />
-            </li>
-          </ul>
+        <form onSubmit = {(e) => {e.preventDefault()}}>
+            
+              <div className="w3-third">
+                <input className="w3-input w3-border" type="text" id="name" placeholder="Name"/>
+              </div>
+              <div className="w3-third">
+                <input className="w3-input w3-border" type="text" id="description" placeholder="Description"/>
+              </div>
+              <div className="w3-third">
+                <select name="privacy" form="privacy" id="privacy" className="w3-input w3-border" >
+                  <option value="0">Private</option>
+                  <option value="1">Public</option>
+                </select>
+              </div>
+              <div className="w3-full">
+                <input className="w3-input w3-border" type="submit" onClick = {this.sendAlbumInfo} />
+              </div>
           </form>
       </div>
       </div>

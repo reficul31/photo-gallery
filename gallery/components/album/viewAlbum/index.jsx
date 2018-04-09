@@ -31,20 +31,31 @@ class ViewAlbum extends React.Component {
   }
   render() {
     return (
-      <div className="table-container">
+      <div className="w3-container">
         <p className={this.props.infoClass}>{this.props.info}</p>
           {this.props.albums.map((album, idx) => {
             return (
-            	<div key={idx}>
-	                <p>{album.name}</p>
-                  <p>{album.description}</p>
-	                <p>{parseInt(album.privacy) == 0?"Private":"Public"}</p>
-                  <p>{album.created}</p>
-	                <p><button onClick={() => {this.editAlbumClicked(album)}}>edit</button></p>
-                  <p><button onClick={() => {this.deleteAlbumClicked(album)}}>delete</button></p>
-                  <p><button onClick={() => {this.addPhotosInAlbumClicked(album)}}>Add Photos</button></p>
-	                <p><button onClick={() => {this.viewPhotosInAlbumClicked(album)}}>View Photos</button></p>
-            	</div>
+              <div key={idx} className="w3-display-container w3-quarter w3-hover-opacity w3-black">
+                <img src="/static/img/album.png" style={{opacity: 0.4}} alt="Avatar"></img>
+                <div className="w3-display-topleft w3-display-hover w3-large">
+                    <button className="w3-white w3-animate-opacity w3-btn w3-margin w3-round" onClick={() => {this.deleteAlbumClicked(album)}} title="Delete Album"><i className="fa fa-close w3-text-red"></i></button>
+                    <button className="w3-white w3-animate-opacity w3-btn w3-margin w3-round" onClick={() => {this.editAlbumClicked(album)}} title="Edit Album"><i className="fa fa-ellipsis-v w3-text-blue"></i></button>
+                    </div>
+                    <div className="w3-display-topright w3-display-hover w3-large">
+                    <button className="w3-white w3-animate-opacity w3-btn w3-margin w3-round" onClick={() => {this.addPhotosInAlbumClicked(album)}} title="Add Photos"><i className="fa fa-cloud-upload"></i></button>
+                      <button className="w3-white w3-animate-opacity w3-btn w3-margin w3-round" onClick={() => {this.viewPhotosInAlbumClicked(album)}} title="View Photos"><i className="fa fa-camera"></i></button>
+                    </div>
+                <div className="w3-display-middle w3-large w3-display-hover w3-text-white">
+              <p style={{fontWeight: "bold"}}>{album.name}</p>
+              <p style={{fontWeight: "bold"}}>{album.description}</p>
+              </div>
+              <div className="w3-display-bottomright w3-display-hover w3-text-white">
+                      {album.created}
+              </div>
+              <div className="w3-display-bottomleft w3-display-hover w3-text-white">
+                      {parseInt(album.privacy) == 0?"PRIVATE":"PUBLIC"}
+              </div>
+              </div>
             )
           })}
       </div>

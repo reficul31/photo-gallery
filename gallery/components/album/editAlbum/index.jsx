@@ -18,29 +18,24 @@ class EditAlbum extends React.Component {
   }
   render() {
     return (
-      <div className="form-container">
+      <div>
         <p className={this.props.infoClass}>{this.props.info}</p>
         <form onSubmit = {(e) => {e.preventDefault()}} className="admin-form">
-          <ul>
-            <li>
-              <label>Name</label>
-              <input type="text" id="name" placeholder="Name" defaultValue={this.props.album.name}/>
-            </li>
-            <li>
-              <label>Description</label>
-              <input type="text" id="description" placeholder="Description" defaultValue={this.props.album.description}/>
-            </li>
-            <li>
-              <label>Privacy</label>
-              <select name="privacy" form="privacy" id="privacy">
+            <div className="w3-third">
+              <input className="w3-input w3-border" type="text" id="name" placeholder="Name" defaultValue={this.props.album.name}/>
+            </div>
+            <div className="w3-third">
+              <input className="w3-input w3-border" type="text" id="description" placeholder="Description" defaultValue={this.props.album.description}/>
+            </div>
+            <div className="w3-third">
+              <select className="w3-input w3-border" name="privacy" form="privacy" id="privacy">
                 <option value="0">Private</option>
-                <option value="1">Public</option>
+                <option value="1">Pubdivc</option>
               </select>
-            </li>
-            <li>
-              <input type="submit" onClick = {this.sendAlbumInfo}/>
-            </li>
-          </ul>
+            </div>
+            <div className="w3-full">
+              <input className="w3-input w3-border" type="submit" onClick = {this.sendAlbumInfo}/>
+            </div>
           </form>
       </div>
     )

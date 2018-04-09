@@ -13,18 +13,27 @@ class Login extends React.Component {
 		const password = document.getElementById('password').value
 		this.props.onUserInput({email, password})
 	}
-
-
 	render() {
 		return (
 			<div>
-				<div className='warn-text'>{this.props.info}</div>
-				<form onSubmit = {(e) => {e.preventDefault()}}>
-					<input type="email" id="email" placeholder="Email" />
-					<input type="password" id="password" placeholder="Password" />
-					<button type="submit" onClick = {this.sendUserInfo} > Login </button>
-					<Link to='/forgotpassword'>Forgot Password ?</Link>
-				</form>
+				<h1 className="w3-jumbo w3-animate-top w3-center">LOGIN</h1>
+				<div className="w3-large w3-center">
+					<div className="w3-row-padding">
+						<div className={this.props.infoClass}>{this.props.info}</div>
+						<form onSubmit = {(e) => {e.preventDefault()}}>
+							<div className="w3-half">
+								<input className="w3-input w3-border" type="email" id="email" placeholder="Email" />
+							</div>
+							<div className="w3-half">
+								<input className="w3-input w3-border" type="password" id="password" placeholder="Password" />
+							</div>
+							<div className="w3-full"> 
+								<button className="w3-btn" type="submit" onClick = {this.sendUserInfo} > Login </button>
+								<button className="w3-btn"><Link to='/forgotpassword'>Forgot Password ?</Link></button>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
 			)
 	}
@@ -32,7 +41,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
 	info: PropTypes.string.isRequired,
-  infoClass: PropTypes.string.isRequired,
+  	infoClass: PropTypes.string.isRequired,
 	onUserInput: PropTypes.func.isRequired,
 }
 

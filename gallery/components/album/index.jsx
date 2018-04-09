@@ -6,11 +6,12 @@ import classNames from 'classnames'
 
 const Album = ({children, location}) => {
   return (
-    <div>
+    <div className="w3-container w3-center">
       <div>
-        <div>Albums</div>
-        <Link className="table-button" to='/gallery/album/add'>Add</Link>
-        <Link className="table-button" to='/gallery/album/view'>View</Link>
+        <h1 className="w3-jumbo w3-animate-top w3-center">ALBUMS</h1>
+        <hr></hr>
+        <button className="w3-button w3-circle w3-teal" title="Add Album"><Link to='/gallery/album/add'>Add</Link></button>
+        <button className="w3-button w3-circle w3-black" title="View Album"><Link to='/gallery/album/view'>View</Link></button>
       </div>
       {children}
     </div>

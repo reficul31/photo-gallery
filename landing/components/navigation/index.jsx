@@ -5,11 +5,10 @@ import classNames from 'classnames'
 
 const Navigation = () => {
 	return (
-			<div>
-				<div>
+			<div className="w3-bar w3-xlarge">
+				<span className="w3-left">PhotoChef</span>
+				<div className="w3-right">
 					<Link to="/login">Login</Link>
-				</div>
-				<div>
 					<Link to="/register">Register</Link>
 				</div>
 			</div>
