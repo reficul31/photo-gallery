@@ -57,7 +57,7 @@ This section contains all the landmarks that have to be hit in order to complete
 - [x] Should show date and time of creation
 - [x] An album should be removable (delete)
 - [x] There should be an albums page.
-- [ ]  An album can have many photos (limit to 1000)
+- [x] An album can have many photos (limit to 1000)
 - [ ] An album can be public/private/only people with the url can view (privacy settings)
 - [ ] An album can be liked by a logged in user.
 - [ ] Bonus: geo location
@@ -74,3 +74,8 @@ This section contains all the landmarks that have to be hit in order to complete
     - username, First name, last name, email, gender, profile picture, password
     - all editable, other than username
 - [x] There should be a user profile page
+### Bonus
+- [x] Token based authentication on all APIs, instead of session based.
+- [x] Implementation of Forgot and Reset Password end points. 
+- [ ] Social login via Facebook, Google+, Twitter etc. (OAuth Login)
+- [ ] Using of better software engineering principles in the code. 
