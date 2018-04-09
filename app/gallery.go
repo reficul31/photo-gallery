@@ -75,7 +75,23 @@ func AlbumHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 			return
 		}
 
+		photos := Photos{}
+		if err = DB.db.Where("album_id = ?", album.ID).Find(&photos).Error; err != nil {
+			write_response(err, w, false, "Couldn't fetch the album photos")
+			return
+		}
+
 		tx := DB.db.Begin()
+		for _, photo := range photos {
+			if err = deleteFile(photo.Name); err != nil {
+				tx.Rollback()
+				write_response(err, w, false, "Can't delete album.")
+			}
+			if err = tx.Delete(&photo).Error; err != nil {
+				tx.Rollback()
+				write_response(err, w, false, "Can't delete album.")
+			}
+		}
 		if err = tx.Delete(&album).Error; err != nil {
 			tx.Rollback()
 			write_response(err, w, false, "Can't delete album.")
