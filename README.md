@@ -58,7 +58,7 @@ This section contains all the landmarks that have to be hit in order to complete
 - [x] An album should be removable (delete)
 - [x] There should be an albums page.
 - [x] An album can have many photos (limit to 1000)
-- [ ] An album can be public/private/only people with the url can view (privacy settings)
+- [x] An album can be public/private/only people with the url can view (privacy settings)
 - [ ] An album can be liked by a logged in user.
 - [ ] Bonus: geo location
 ### Photo
@@ -66,7 +66,7 @@ This section contains all the landmarks that have to be hit in order to complete
 - [x] A photo can only be uploaded to an album
 - [x] Should show date and time of creation
 - [x] A photo should be removable (delete)
-- [ ] A photo can be public/private/only people with the url can view (privacy setting)
+- [x] A photo can be public/private/only people with the url can view (privacy setting)
 - [ ] A photo can be liked by a logged in user.
 - [ ] Bonus: geo location
 ### User
