@@ -219,6 +219,22 @@ func FetchPhoto(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 
+	var userId int
+	if photo.Privacy == 0 {
+		row, err := DB.db.Raw("select users.id from users, albums where users.id = albums.user_id and albums.id = (select album_id from photos where photos.id = ?)", photo.ID).Rows()
+		if err != nil {
+			write_response(err, w, false, "Internal Server Error.")
+			return
+		}
+		row.Next()
+		row.Scan(&userId)
+		row.Close()
+		if userId != currUser.ID {
+			write_response(err, w, false, "This photo seems to be private")
+			return
+		}
+	}
+
 	out, err := json.Marshal(photo)
 	if err != nil {
 		write_response(err, w, false, "Internal Server Error.")
@@ -242,6 +258,10 @@ func FetchAlbum(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 
+	if album.Privacy == 0 && album.UserID != uint(currUser.ID) {
+		write_response(err, w, false, "This seems to be a private album.")
+		return
+	}
 
 	photos := Photos{}
 	if err = DB.db.Where("album_id=?", album.ID).Find(&photos).Error; err != nil {
