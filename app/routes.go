@@ -191,4 +191,16 @@ var routes = Routes{
 		"/photo",
 		RequiresLogin(PhotoHandler, false),
 	},
+	Route{
+		"FetchPhoto",
+		"GET",
+		"/fetchPhoto",
+		RequiresLogin(FetchPhoto, false),
+	},
+	Route{
+		"FetchAlbum",
+		"GET",
+		"/fetchAlbum",
+		RequiresLogin(FetchAlbum, false),
+	},
 }

@@ -205,3 +205,58 @@ func PhotoHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	write_response(nil, w, true, string(out))
 	return
 }
+
+func FetchPhoto(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	photoId, err := strconv.ParseInt(r.URL.Query().Get("photoId"), 10, 16)
+	if err != nil {
+		write_response(err, w, false, "Unable to read query parameter")
+		return
+	}
+
+	photo := Photo{}
+	if DB.db.Where("id=?", photoId).First(&photo).RecordNotFound() {
+		write_response(err, w, false, "Can't find the photo.")
+		return
+	}
+
+	out, err := json.Marshal(photo)
+	if err != nil {
+		write_response(err, w, false, "Internal Server Error.")
+		return
+	}
+
+	write_response(nil, w, true, string(out))
+	return
+}
+
+func FetchAlbum(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	albumId, err := strconv.ParseInt(r.URL.Query().Get("albumId"), 10, 16)
+	if err != nil {
+		write_response(err, w, false, "Unable to read query parameter")
+		return
+	}
+
+	album := Album{}
+	if DB.db.Where("id=?", albumId).First(&album).RecordNotFound() {
+		write_response(err, w, false, "Can't find the album.")
+		return
+	}
+
+
+	photos := Photos{}
+	if err = DB.db.Where("album_id=?", album.ID).Find(&photos).Error; err != nil {
+		write_response(err, w, false, "Can't find the photos of the album.")
+		return
+	}
+
+	album.Photos = photos
+
+	out, err := json.Marshal(album)
+	if err != nil {
+		write_response(err, w, false, "Internal Server Error.")
+		return
+	}
+
+	write_response(nil, w, true, string(out))
+	return
+}
