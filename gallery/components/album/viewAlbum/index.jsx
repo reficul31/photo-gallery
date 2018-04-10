@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { Link } from 'react-router'
 
 class ViewAlbum extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class ViewAlbum extends React.Component {
                     </div>
                     <div className="w3-display-topright w3-display-hover w3-large">
                     <button className="w3-white w3-animate-opacity w3-btn w3-margin w3-round" onClick={() => {this.addPhotosInAlbumClicked(album)}} title="Add Photos"><i className="fa fa-cloud-upload"></i></button>
-                      <button className="w3-white w3-animate-opacity w3-btn w3-margin w3-round" onClick={() => {this.viewPhotosInAlbumClicked(album)}} title="View Photos"><i className="fa fa-camera"></i></button>
+                    <button className="w3-white w3-animate-opacity w3-btn w3-margin w3-round" onClick={() => {this.viewPhotosInAlbumClicked(album)}} title="View Photos"><i className="fa fa-camera"></i></button>
                     </div>
                 <div className="w3-display-middle w3-large w3-display-hover w3-text-white">
               <p style={{fontWeight: "bold"}}>{album.name}</p>
@@ -53,7 +54,7 @@ class ViewAlbum extends React.Component {
                       {album.created}
               </div>
               <div className="w3-display-bottomleft w3-display-hover w3-text-white">
-                      {parseInt(album.privacy) == 0?"PRIVATE":"PUBLIC"}
+                  <Link to={'/gallery/showcase/album/'+album.id}><button className="w3-white w3-animate-opacity w3-btn w3-margin w3-round" title="View Album"><i className="fa fa-paperclip"></i></button></Link>
               </div>
               </div>
             )

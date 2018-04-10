@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
 	album: reducer.album,
 	photo: reducer.photo,
 	user: reducer.user,
+	showcase: reducer.showcase,
 })
 
 const rootEpic = combineEpics(

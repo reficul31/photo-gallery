@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { Link } from 'react-router'
 
 class ViewPhoto extends React.Component {
     constructor(props) {
@@ -33,9 +34,9 @@ class ViewPhoto extends React.Component {
                 <div className="w3-display-bottomright w3-display-hover">
                   <p className="w3-black">{photo.created}</p>
                 </div>
-                <div className="w3-display-bottomleft w3-display-hover">
-                  <p className="w3-black">{parseInt(photo.privacy) == 0?"PRIVATE":"PUBLIC"}</p>
-                </div>
+                <div className="w3-display-bottomleft w3-display-hover w3-text-white">
+                  <Link to={'/gallery/showcase/photo/'+photo.id}><button className="w3-white w3-animate-opacity w3-btn w3-margin w3-round" title="View Photo"><i className="fa fa-paperclip"></i></button></Link>
+              </div>
               </div>
             )
           })}

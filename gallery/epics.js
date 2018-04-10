@@ -6,6 +6,7 @@ import * as actions from './actions'
 import {sendAlbum, getAlbum} from './actions/album'
 import {sendPhoto, getPhoto} from './actions/photo'
 import {sendUser, getUser} from './actions/user'
+import {getAlbumShowcase, getPhotoShowcase} from './actions/showcase'
 
 export const validateAlbumOnAdminInput = action$ => action$
   .filter(action => action.type === actions.album.addAlbum.getType())
@@ -41,3 +42,11 @@ export const validateUserOnAdminInput = action$ => action$
   .filter(action => action.type === actions.user.editUser.getType())
   .debounceTime(500)
   .map((action) => sendUser(action.payload))
+
+export const fetchAlbumForShowcase = action$ => action$
+  .filter(action => action.type === actions.showcase.fetchAlbum.getType())
+  .map((action) => getAlbumShowcase(action.payload))
+
+export const fetchPhotoForShowcase = action$ => action$
+  .filter(action => action.type === actions.showcase.fetchPhoto.getType())
+  .map((action) => getPhotoShowcase(action.payload))

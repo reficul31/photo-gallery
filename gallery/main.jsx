@@ -19,6 +19,10 @@ import User from './components/user'
 import ViewUserContainer from './containers/user/viewUser'
 import EditUserContainer from './containers/user/editUser'
 
+import Showcase from './components/showcase'
+import ShowcaseAlbumContainer from './containers/showcase/showcaseAlbum'
+import ShowcasePhotoContainer from './containers/showcase/showcasePhoto'
+
 import Routes from './routes'
 
 let ReduxDevTools
@@ -36,6 +40,7 @@ ReactDOM.render(
     <div>
       <Router history={browserHistory}>
         <Redirect from='/' to='/gallery/album'/>
+        <Redirect from='/gallery' to='/gallery/album'/>
         <Route path='/gallery/layout' component={Layout}>
           <IndexRedirect to='/gallery/album' />
           <Route key='/gallery/album' path='/gallery/album' component={Album}>
@@ -49,7 +54,11 @@ ReactDOM.render(
             <Route key='/gallery/photo/view' path='/gallery/photo/view' component={ViewPhotoContainer}/>
             <Route key='/gallery/photo/add' path='/gallery/photo/add' component={AddPhotoContainer}/>
           </Route>
-          <Route key='/gallery' path='/gallery' component={User}>
+          <Route key='/gallery/showcase' path='/gallery/showcase' component={Showcase}>
+            <Route key='/gallery/showcase/photo/:photoId' path='/gallery/showcase/photo/:photoId' component={ShowcasePhotoContainer}/>
+            <Route key='/gallery/showcase/album/:albumId' path='/gallery/showcase/album/:albumId' component={ShowcaseAlbumContainer}/>
+          </Route>
+          <Route key='/gallery/user' path='/gallery/user' component={User}>
             <IndexRedirect to='/gallery/user/view' />
             <Route key='/gallery/user/view' path='/gallery/user/view' component={ViewUserContainer}/>
             <Route key='/gallery/user/edit' path='/gallery/user/edit' component={EditUserContainer}/>
