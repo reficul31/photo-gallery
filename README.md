@@ -1,21 +1,21 @@
 # codechef-photo-gallery
-A photo gallery app made for codechef
+A photo gallery app made for codechef recruitments 2018
 
 ## How to Run the Code?
 This section describes how the app can be viewed in action.
 
-* Step 1: Download and setup GoLang
+* Step 1: Download and setup GoLang  
 Install GoLang. Official documentation installation is prefect and will work seamlessly. Please be wary to setup the directory structure as specified in the docs.
 
-* Step 2: Download the App to your local machine
+* Step 2: Download the App to your local machine  
 Once golang is installed run the following command  
 ```
 go get github.com/reficul31/codechef-photo-gallery
 ```
 This would fetch the entire application to the following path ```$GOPATH/src/github.com/reficul31/codechef-photo-gallery```
 
-Step 3: Migration the models and Running the Server
-One the application is downloaded. Just run the following commands in sequence to migrate the models and also to run the server. Please change the ```config.json``` file to reflect the database name and login credentials.
+* Step 3: Migration the models and Running the Server  
+Once the application is downloaded. Just run the following commands in sequence to migrate the models and also to run the server. Please change the ```config.json``` file to reflect the database name and login credentials.
 ```
 go run migrate.go
 go run main.go
