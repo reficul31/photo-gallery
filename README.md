@@ -1,4 +1,4 @@
-# codechef-photo-gallery
+# CodeChef Photo Gallery
 A photo gallery app made for codechef recruitments 2018
 
 ## How to Run the Code?
@@ -14,12 +14,12 @@ go get github.com/reficul31/codechef-photo-gallery
 ```
 This would fetch the entire application to the following path ```$GOPATH/src/github.com/reficul31/codechef-photo-gallery```
 
-* Step 3: Running the Server
-One the application is downloaded. Just run the following commands in sequence to run the server. 
+* Step 3: Running the Server  
+Once the application is downloaded, run the following commands in sequence to run the server. 
 ```
 go run main.go
 ```
-Once the application is running go to the following [link](http://localhost:8080).
+Once the application is running, go to the following [link](http://localhost:8080).
 The dummy account's username and password is  
 ```
 Username: test@test.com
