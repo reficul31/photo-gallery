@@ -1,8 +1,9 @@
 package app
 
 import (
-	"fmt"
-	_ "github.com/go-sql-driver/mysql" // the mysql driver
+	// "fmt"
+	// _ "github.com/go-sql-driver/mysql"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/jinzhu/gorm"
 	"github.com/julienschmidt/httprouter"
 	"log"
@@ -30,12 +31,13 @@ var (
 func (a *App) Initialize(config Configuration) {
 	a.Config = config
 
-	connectionString := fmt.Sprintf("%s:%s@/%s?charset=utf8&parseTime=True&loc=Local",
-		config.DBUsername,
-		config.DBPassword,
-		config.DBName)
+	// connectionString := fmt.Sprintf("%s:%s@/%s?charset=utf8&parseTime=True&loc=Local",
+	// 	config.DBUsername,
+	// 	config.DBPassword,
+	// 	config.DBName)
 
-	DB.db, err = gorm.Open("mysql", connectionString)
+	// DB.db, err = gorm.Open("mysql", connectionString)
+	DB.db, err = gorm.Open("sqlite3", "./gallery.db")
 	if err != nil {
 		log.Fatal(err)
 	}
