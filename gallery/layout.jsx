@@ -4,9 +4,9 @@ import Navigation from './components/navigation'
 
 import classNames from 'classnames'
 
-const Layout = ({children}) => (
+const Layout = ({children, location}) => (
 	<div>
-		<Navigation />
+		<Navigation location = {location}/>
 		<div>
 			{children}
 		</div>
