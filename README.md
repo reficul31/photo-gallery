@@ -14,11 +14,16 @@ go get github.com/reficul31/codechef-photo-gallery
 ```
 This would fetch the entire application to the following path ```$GOPATH/src/github.com/reficul31/codechef-photo-gallery```
 
-* Step 3: Migration the models and Running the Server  
-Once the application is downloaded. Just run the following commands in sequence to migrate the models and also to run the server. Please change the ```config.json``` file to reflect the database name and login credentials.
+* Step 3: Running the Server
+One the application is downloaded. Just run the following commands in sequence to run the server. 
 ```
-go run migrate.go
 go run main.go
+```
+Once the application is running go to the following [link](http://localhost:8080).
+The dummy account's username and password is  
+```
+Username: test@test.com
+Password: password
 ```
 
 ## API Table
