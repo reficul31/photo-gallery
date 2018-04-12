@@ -5,8 +5,9 @@ const setInfo = createAction('user/setInfo')
 const setUser = createAction('user/setUser')
 const editUser = createAction('user/editUser')
 const fetchUser = createAction('user/fetchUser')
+const deleteUser = createAction('user/deleteUser')
 
-export default {setInfo, fetchUser, setUser, editUser}
+export default {setInfo, fetchUser, setUser, editUser, deleteUser}
 
 const validateUserDetails = (data) => {
   let objKeys = Object.keys(data)
@@ -30,7 +31,7 @@ export function sendUser(data) {
     const {info, infoClass} = validateUserDetails(data.user)
     dispatch(setInfo({info, infoClass}))
     if(infoClass == 'info'){
-      await fetch('/modifyUser', {
+      await fetch('/user', {
         method      : data.type,
         body        : JSON.stringify(data.user),
         credentials : 'same-origin',
@@ -47,7 +48,7 @@ export function sendUser(data) {
 
 export function getUser(data) {
   return async function(dispatch) {
-    await fetch(`/getUser`, {
+    await fetch(`/user`, {
       method      : 'GET',
       credentials : 'same-origin',
       headers     : { 'Content-Type': 'multipart/form-data' }
