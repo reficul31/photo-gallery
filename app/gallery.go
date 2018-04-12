@@ -206,6 +206,118 @@ func PhotoHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	return
 }
 
+func UserHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	var out []byte // json output
+	defer r.Body.Close()
+
+	switch r.Method {
+	case "GET":
+		user := User{}
+		if DB.db.Select("id, name, gender, email").Where("id=?", currUser.ID).First(&user).RecordNotFound() {
+			write_response(err, w, false, "Couldn't find user")
+			return
+		}
+
+		rows, err := DB.db.Raw("select count(distinct albums.id), count(photos.id) from photos, albums where photos.album_id = albums.id and albums.id in (select id from albums where user_id=?)", currUser.ID).Rows()
+		if err != nil {
+			write_response(err, w, false, "Internal Server Error")
+			return
+		}
+		var albums, photos int
+		rows.Next()
+		rows.Scan(&albums, &photos)
+		rows.Close()
+
+		respUser := GetUserStruct{
+			Name: user.Name,
+			Email: user.Email,
+			Gender: user.Gender,
+			Albums: albums,
+			Photos: photos,
+		}
+
+
+		out, err = json.Marshal(respUser)
+		if err != nil {
+			write_response(err, w, false, "Internal Server Error")
+			return
+		}
+	case "PUT":
+		respUser := User{}
+		err = json.NewDecoder(r.Body).Decode(&respUser)
+
+		if err != nil {
+			write_response(err, w, false, "Internal Server Error")
+			return
+		}
+
+		updatedUser := User{}
+		if DB.db.Where("id=?", currUser.ID).First(&updatedUser).RecordNotFound() {
+			write_response(err, w, false, "Couldn't find user")
+			return
+		}
+
+		updatedUser.Name = respUser.Name
+		updatedUser.Gender = respUser.Gender
+		updatedUser.Email = respUser.Email
+
+		tx := DB.db.Begin()
+		if err = tx.Save(&updatedUser).Error; err != nil {
+			tx.Rollback()
+			write_response(err, w, false, "Can't update user")
+			return
+		}
+		tx.Commit()
+		out = []byte("User Updated!")
+	case "DELETE":
+		user := User{}
+		if DB.db.Select("id, name, gender, email").Where("id=?", currUser.ID).First(&user).RecordNotFound() {
+			write_response(err, w, false, "Couldn't find user")
+			return
+		}
+
+		albums := Albums{}
+		if err := DB.db.Where("user_id=?", user.ID).Find(&albums).Error; err != nil {
+			write_response(err, w, false, "Couldn't find user's albums")
+			return
+		}
+
+		tx := DB.db.Begin()
+		for _, album := range albums {
+			photos := Photos{}
+			if err := DB.db.Where("album_id=?", album.ID).Find(&photos).Error; err != nil {
+				write_response(err, w, false, "Couldn't find user's albums")
+				return
+			}
+			for _, photo := range photos {
+				if err = deleteFile(photo.Name); err != nil {
+					tx.Rollback()
+					write_response(err, w, false, "Can't delete user.")
+				}
+				if err = tx.Delete(&photo).Error; err != nil {
+					tx.Rollback()
+					write_response(err, w, false, "Can't delete user.")
+				}
+			}
+			if err = tx.Delete(&album).Error; err != nil {
+				tx.Rollback()
+				write_response(err, w, false, "Can't delete user.")
+			}
+		}
+
+		if err = tx.Delete(&user).Error; err != nil {
+			tx.Rollback()
+			write_response(err, w, false, "Can't delete user.")
+		}
+
+		tx.Commit()
+		out = []byte("User Deleted!")
+	}
+
+	write_response(nil, w, true, string(out))
+	return
+}
+
 func FetchPhoto(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	photoId, err := strconv.ParseInt(r.URL.Query().Get("photoId"), 10, 16)
 	if err != nil {
