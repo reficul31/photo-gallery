@@ -46,12 +46,12 @@ This section describes the API made for and utilized by this app.
 | DELETE    | Delete | Photo ID     |                | /photo     |
 
 ### User
-| HTTP Verb | CRUD   | PARAMS(JSON) | RETURNS(JSON)  | ENDPOINT    |
-|-----------|--------|--------------|----------------| ------------|
-| GET       | Read   |              | User Details   | /getUser    |
-| PUT       | Update | User ID      |                | /modifyUser |
-| POST      | Create | User Object  |                | /register   |
-| DELETE    | Delete | User ID      |                | /deleteUser |
+| HTTP Verb | CRUD   | PARAMS(JSON) | RETURNS(JSON)  | ENDPOINT |
+|-----------|--------|--------------|----------------| ---------|
+| GET       | Read   |              | User Details   | /user    |
+| PUT       | Update | User ID      |                | /user    |
+| POST      | Create | User Object  |                | /register|
+| DELETE    | Delete | User ID      |                | /user    |
 
 ## TODOS
 This section contains all the landmarks that have to be hit in order to complete the challenge successfully
