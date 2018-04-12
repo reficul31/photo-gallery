@@ -134,14 +134,20 @@ var routes = Routes{
 	Route{
 		"GetUser",
 		"GET",
-		"/getUser",
-		RequiresLogin(GetUser, false),
+		"/user",
+		RequiresLogin(UserHandler, false),
 	},
 	Route{
 		"ModifyUser",
 		"PUT",
-		"/modifyUser",
-		RequiresLogin(ModifyUser, false),
+		"/user",
+		RequiresLogin(UserHandler, false),
+	},
+	Route{
+		"DeleteUser",
+		"DELETE",
+		"/user",
+		RequiresLogin(UserHandler, false),
 	},
 	Route{
 		"Gallery",
