@@ -5,12 +5,17 @@ import classNames from 'classnames'
 class ViewUser extends React.Component {
   constructor(props) {
     super(props);
+    this.deleteUserAccount = this.deleteUserAccount.bind(this);
   }
   componentWillMount() {
     this.props.onComponentMount()
   }
   componentWillUnmount() {
     this.props.clearInfo()
+  }
+  deleteUserAccount() {
+    this.props.onDeleteUser({})
+    window.location.assign("/logout")
   }
   render() {
     return (
@@ -34,6 +39,9 @@ class ViewUser extends React.Component {
           <td>{this.props.user.photos}</td>
         </tr>
       </table>
+      <button className="w3-full w3-red w3-text-white" onClick = {this.deleteUserAccount}>
+          <h3>Delete Account</h3>
+      </button>
       </div>
     )
   }
@@ -44,6 +52,7 @@ ViewUser.propTypes = {
   info: PropTypes.string.isRequired,
   infoClass: PropTypes.string.isRequired,
   onComponentMount: PropTypes.func.isRequired,
+  onDeleteUser: PropTypes.func.isRequired,
   clearInfo: PropTypes.func.isRequired,
 }
 

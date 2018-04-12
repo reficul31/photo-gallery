@@ -17,6 +17,9 @@ const mapDispatchToProps = dispatch => ({
   },
   clearInfo: () => {
     dispatch(actions.user.setInfo({info: '', infoClass: ''}))
+  },
+  onDeleteUser: input => {
+    dispatch(actions.user.deleteUser({user: input, type:'DELETE'}))
   }
 })
 
