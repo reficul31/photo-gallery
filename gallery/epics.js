@@ -43,6 +43,11 @@ export const validateUserOnAdminInput = action$ => action$
   .debounceTime(500)
   .map((action) => sendUser(action.payload))
 
+export const deleteUserOnAdminInput = action$ => action$
+  .filter(action => action.type === actions.user.deleteUser.getType())
+  .debounceTime(500)
+  .map((action) => sendUser(action.payload))
+
 export const fetchAlbumForShowcase = action$ => action$
   .filter(action => action.type === actions.showcase.fetchAlbum.getType())
   .map((action) => getAlbumShowcase(action.payload))

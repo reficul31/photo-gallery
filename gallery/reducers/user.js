@@ -13,6 +13,10 @@ function fetchUser(state) {
   return {...state, info: 'Fetching user from the database', infoClass: 'info'}
 }
 
+function deleteUser(state) {
+  return {...state, info: 'Deleting user from the database', infoClass: 'info'}
+}
+
 function setUser(state, user) {
   return {...state, user}
 }
@@ -30,4 +34,5 @@ export default createReducer({
   [actions.user.editUser]: editUser,
   [actions.user.setUser]: setUser,
   [actions.user.fetchUser]: fetchUser,
+  [actions.user.deleteUser]: deleteUser,
 }, defaultStore)
